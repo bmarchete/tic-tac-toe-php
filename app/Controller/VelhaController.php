@@ -15,17 +15,20 @@ class VelhaController
     {
         $_SESSION['jogador'] = true;
         $_SESSION['vencedor'] = false;
+
+        session_unset();
+
         header('Location: /game');
         
     }
 
     public function game()
     {
-      
+     
       $flash = false;
         // verifica se existe menssagem flash para sere impressa na view
         if( array_key_exists('flash', $_SESSION)){
-            $flash = $_SESSION['flash'];
+             $flash = $_SESSION['flash'];
             unset($_SESSION['flash']);
         }
 
@@ -45,6 +48,7 @@ class VelhaController
 
     public function jogada()
     {
+
         // percorre o vetor $_POST procurando a chave válida. 
         // TODO: melhorar essa logica
 
@@ -63,17 +67,17 @@ class VelhaController
             exit;
         }
 
-         // verifica se ouve vencedor
-        if( $this->hasVencedor() ){
-            header('Location: /winner');
-            exit;
-        }
 
         // guarda jogada na sessão
         $_SESSION['n' . $casa] = $_SESSION['jogador'] ? 'X' : 'O';
         $_SESSION['jogador'] = !$_SESSION['jogador'];
 
-        
+          // verifica se ouve vencedor
+        if( $this->hasVencedor() ){
+            $_SESSION['flash'] = 'winner';
+           
+        }
+
         //volta ao tabuleiro
         header('Location: /game');
 
@@ -86,7 +90,7 @@ class VelhaController
         // verfica colunas e linhas 
         for ($i=1; $i <= 9; $i+= 3) { 
              if(isset($v['n'. $i] ) && isset($v['n'  . ($i+1)]) && isset($v['n'. ($i+2)]) ){
-                //  echo '<p style="color:white;">aqui</p>';
+               
                 if($v['n' . $i] == 'X' && $v['n' . ($i+1)] == 'X' && $v['n' . ($i+2)] == 'X'){
                    
                     $_SESSION['vencedor'] = 'X';
@@ -108,7 +112,8 @@ class VelhaController
                     return true;
                 }
 
-                if($v['n' . ($i)] == 'O' && $v['n' . ($i+6)] == 'O' && $v['n' . ($i+6)] == 'O'){
+                if($v['n' . ($i)] == 'O' && $v['n' . ($i+3)] == 'O' && $v['n' . ($i+6)] == 'O'){
+                    
                     $_SESSION['vencedor'] = 'O';
                     return true;
                 }         
@@ -127,6 +132,7 @@ class VelhaController
                 }
 
                 if($v['n1'] == 'O' && $v['n5'] == 'O' && $v['n9'] == 'O'){
+                    
                     $_SESSION['vencedor'] = 'O';
                     return true;
                 }         
@@ -142,13 +148,13 @@ class VelhaController
                 }
 
                 if($v['n3'] == 'O' && $v['n5'] == 'O' && $v['n7'] == 'O'){
+                    
                     $_SESSION['vencedor'] = 'O';
                     return true;
                 }         
         }
 
         return false;
-
 
     }
 }

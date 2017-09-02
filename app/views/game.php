@@ -73,7 +73,16 @@
 
 <body>
     <div class="container">
-      <p style="color: white;"><?= $flash? $flash : ''?></p>
+
+    <?php if($flash == 'winner'){ ?>
+      <p style="color: white;">Temos um Vencedor: <?= $_SESSION['vencedor']?> !</p>
+      <a href="/">Reiniciar partida</a>
+        
+         
+     <?php } ?>
+      <p style="color: white;"><?= $flash ?></p>
+  
+
     </div>
 <form method="post" action="/jogada">
      <div class="ticTacToe">
