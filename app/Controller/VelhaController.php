@@ -87,72 +87,62 @@ class VelhaController
     {
         $v = $_SESSION;
       
+      $branco = true;
+
+      //verifica se todos estão brancos
+      for ($i=1; $i <= 9; $i+= 3) { 
+        $branco = !isset($v['n' . $i]) ;
+        if(!$branco) break;
+      }
+
+      //se todos estiverem brancos, retorne sem vencedores
+      if($branco) return false;
+
         // verfica colunas e linhas 
         for ($i=1; $i <= 9; $i+= 3) { 
-             if(isset($v['n'. $i] ) && isset($v['n'  . ($i+1)]) && isset($v['n'. ($i+2)]) ){
-               
-                if($v['n' . $i] == 'X' && $v['n' . ($i+1)] == 'X' && $v['n' . ($i+2)] == 'X'){
-                   
-                    $_SESSION['vencedor'] = 'X';
+
+            //verifica linhas
+            // if(isset($v['n'. $i] ) && isset($v['n'  . ($i+1)]) && isset($v['n'. ($i+2)]) ){
+          
+                if($v['n' . $i] ==  $v['n' . ($i+1)]  && $v['n' . ($i+2)] == $v['n' . $i] && $v['n' . $i] != null){
+                    die(); exit;
+                    $_SESSION['vencedor'] = $v['n' . $i];
                     return true;
                 }
+                     
+           // }
 
-                if($v['n' . ($i)] == 'O' && $v['n' . ($i+1)] == 'O' && $v['n' . ($i+2)] == 'O'){
-                    $_SESSION['vencedor'] = 'O';
-                    return true;
-                }         
-                   
-            }
-
-            if(isset($v['n'. $i] ) && isset($v['n'  . ($i+3)]) && isset($v['n'. ($i+6)]) ){
-                //  echo '<p style="color:white;">aqui</p>';
-                if($v['n' . $i] == 'X' && $v['n' . ($i+3)] == 'X' && $v['n' . ($i+6)] == 'X'){
-                    
-                    $_SESSION['vencedor'] = 'X';
-                    return true;
-                }
-
-                if($v['n' . ($i)] == 'O' && $v['n' . ($i+3)] == 'O' && $v['n' . ($i+6)] == 'O'){
-                    
-                    $_SESSION['vencedor'] = 'O';
-                    return true;
-                }         
+            //verifica colunas
+            //if(isset($v['n'. $i] ) && isset($v['n'  . ($i+3)]) && isset($v['n'. ($i+6)]) ){
                 
-            }
+                if($v['n' . $i] == $v['n' . ($i+3)] && $v['n' . ($i+6)] == $v['n' . $i] && isset($v['n' . $i])){
+                    
+                    $_SESSION['vencedor'] = $v['n' . $i];
+                    return true;
+                }
            
+            //}
         }
 
         // verifica diagonal direita-esquerda
-        if(isset($v['n1'] ) && isset($v['n5']) && isset($v['n9']) ){
-                //  echo '<p style="color:white;">aqui</p>';
-                if($v['n1'] == 'X' && $v['n5'] == 'X' && $v['n9'] == 'X'){
+       // if(isset($v['n1'] ) && isset($v['n5']) && isset($v['n9']) ){
+                
+                if($v['n1'] == $v['n5']  && $v['n1'] == $v['n9'] && isset($v['n1'])){
                     
-                    $_SESSION['vencedor'] = 'X';
+                    $_SESSION['vencedor'] = $v['n1'];
                     return true;
                 }
-
-                if($v['n1'] == 'O' && $v['n5'] == 'O' && $v['n9'] == 'O'){
-                    
-                    $_SESSION['vencedor'] = 'O';
-                    return true;
-                }         
-        }
+       // }
 
         // verifica diagonal esquerda-direita
-        if(isset($v['n3'] ) && isset($v['n5']) && isset($v['n7']) ){
-                //  echo '<p style="color:white;">aqui</p>';
-                if($v['n3'] == 'X' && $v['n5'] == 'X' && $v['n7'] == 'X'){
+       // if(isset($v['n3'] ) && isset($v['n5']) && isset($v['n7']) ){
+              
+                if($v['n3'] == $v['n5']  && $v['n7'] == $v['n3'] && isset($v['n3'])){
                     
-                    $_SESSION['vencedor'] = 'X';
+                    $_SESSION['vencedor'] = $v['n3'] ;
                     return true;
                 }
-
-                if($v['n3'] == 'O' && $v['n5'] == 'O' && $v['n7'] == 'O'){
-                    
-                    $_SESSION['vencedor'] = 'O';
-                    return true;
-                }         
-        }
+        //}
 
         return false;
 
