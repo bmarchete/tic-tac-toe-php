@@ -4,6 +4,9 @@
 use Project\Controller\VelhaController;
 $velhaController = new VelhaController();
 
+use Project\Controller\LoginController;
+$loginController = new LoginController();
+
 
 //configuração do banco de dados
 $_ENV['config'] = [

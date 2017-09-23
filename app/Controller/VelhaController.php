@@ -87,7 +87,7 @@ class VelhaController
     {
         $v = $_SESSION;
       
-        // verfica colunas e linhas 
+        // verfica colunas
         for ($i=1; $i <= 9; $i+= 3) { 
              if(isset($v['n'. $i] ) && isset($v['n'  . ($i+1)]) && isset($v['n'. ($i+2)]) ){
                
@@ -103,9 +103,13 @@ class VelhaController
                 }         
                    
             }
+        }
+        
+        //verifica linhas
+        for ($i=1; $i <= 3; $i++) { 
 
             if(isset($v['n'. $i] ) && isset($v['n'  . ($i+3)]) && isset($v['n'. ($i+6)]) ){
-                //  echo '<p style="color:white;">aqui</p>';
+               
                 if($v['n' . $i] == 'X' && $v['n' . ($i+3)] == 'X' && $v['n' . ($i+6)] == 'X'){
                     
                     $_SESSION['vencedor'] = 'X';

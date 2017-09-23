@@ -4,7 +4,12 @@
 
 switch ($uri) {
     
-    case '/':
+    case '/';
+
+        require './app/views/index.php';
+        break;
+
+    case '/start':
         $velhaController->start();
         break;
    
@@ -21,6 +26,21 @@ switch ($uri) {
 
     case '/winner';
         die('winner');
+        break;
+
+    case '/login';
+
+        require './app/views/login.php';
+        break;
+
+    case '/register';
+
+        require './app/views/register.php';
+        break;
+
+    case '/post-register';
+
+         $loginController->postRegister();
         break;
     
     default:
