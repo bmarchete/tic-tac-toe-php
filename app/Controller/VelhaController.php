@@ -10,6 +10,18 @@ class VelhaController
     {
         session_start();
     }
+
+    public function index()
+    {
+        $flash = false;
+        // verifica se existe menssagem flash para sere impressa na view
+        if( array_key_exists('flash', $_SESSION)){
+             $flash = $_SESSION['flash'];
+            unset($_SESSION['flash']);
+        }
+
+        require './app/views/index.php';
+    }
     
     public function start()
     {

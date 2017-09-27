@@ -38,12 +38,12 @@
 				<div class="header__title-sub">By Professor Binho</div>
 			</a>
 			<div class="header__social-icons">
-				<form class="navbar-form " role="search">
+				<form class="navbar-form " role="search" action="/login" method="post">
 					<div class="form-group">
-						<input type="text" class="form-control" name="username" placeholder="Nome">
+						<input type="text" class="form-control" name="email" placeholder="Email">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" name="password" placeholder="Senha">
+						<input type="text" class="form-control" name="senha" placeholder="Senha">
 					</div>
 					<button type="submit" class="btn btn-default">Entrar</button>
 				</form>
@@ -51,6 +51,8 @@
 		</div>
 	</header>
 	<!-- End Header -->
+
+	
 
 	<!-- First Fixed "Hero" Section -->
 	<section id="hero" class="hero">
@@ -61,7 +63,9 @@
 					<div class="hero__title-large">Ola!</div>
 					<div class="hero__title-small">Vamos jogar o Jogo da Velha?.</div>
 				</div>
-
+				<?php if($flash) { ?>
+                <div class="alert alert-danger text-center" role="alert"><?= $flash ?></div>
+            <?php } ?>
 				<div class="hero__description">
 					O jogo da velha, além de divertido, é um excelente exemplo para começar a desenvolver jogos. Esse foi feito para web! Confira
 					fazendo seu cadastro!

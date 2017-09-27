@@ -12,7 +12,15 @@
 <body>
 
   <div class="container">
+
+
+
         <div class="card card-container">
+
+            <?php if($flash) { ?>
+                <div class="alert alert-danger text-center" role="alert"><?= $flash ?></div>
+            <?php } ?>
+
             <form class="form-signin" method="post" action="/post-register">
             <h1 class="text-center">Registrar</h1>
                 <input type="email" id="inputEmail" name="email" class="form-control" placeholder="Email" required autofocus>

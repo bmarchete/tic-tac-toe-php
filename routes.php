@@ -6,7 +6,7 @@ switch ($uri) {
     
     case '/';
 
-        require './app/views/index.php';
+        $velhaController->index();
         break;
 
     case '/start':
@@ -30,12 +30,12 @@ switch ($uri) {
 
     case '/login';
 
-        require './app/views/login.php';
+        $loginController->login();
         break;
 
     case '/register';
 
-        require './app/views/register.php';
+        $loginController->register();
         break;
 
     case '/post-register';

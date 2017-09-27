@@ -30,7 +30,7 @@ class QueryBuilder
             return $first ? $s->fetch($fetch) : $s->fetchAll($fetch);
 
         }  catch(\PDOException $e){
-             die($e->getMessage());
+            return false;
         }
         
     }
@@ -47,7 +47,7 @@ class QueryBuilder
         try {
             return $stmt->execute($data);
         } catch (\PDOException $ex) {
-            die($ex->getMessage());
+            return false;
         }
     }
 
