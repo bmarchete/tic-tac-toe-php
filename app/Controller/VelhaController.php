@@ -9,17 +9,22 @@ class VelhaController
     public function __construct()
     {
         session_start();
+        $this->flash = $this->verificaFlash();
+    }
+
+    private function verificaFlash()
+    {
+        if( array_key_exists('flash', $_SESSION)){
+            $flash = $_SESSION['flash'];
+           unset($_SESSION['flash']);
+           return $flash;
+       }
+
+       return false;
     }
 
     public function index()
     {
-        $flash = false;
-        // verifica se existe menssagem flash para sere impressa na view
-        if( array_key_exists('flash', $_SESSION)){
-             $flash = $_SESSION['flash'];
-            unset($_SESSION['flash']);
-        }
-
         require './app/views/index.php';
     }
     
@@ -37,13 +42,7 @@ class VelhaController
     public function game()
     {
      
-      $flash = false;
-        // verifica se existe menssagem flash para sere impressa na view
-        if( array_key_exists('flash', $_SESSION)){
-             $flash = $_SESSION['flash'];
-            unset($_SESSION['flash']);
-        }
-
+     
         // atribui os valores as devidas casas
         for ($i=1; $i <= 9; $i++) { 
             if(array_key_exists('n' . $i, $_SESSION)){

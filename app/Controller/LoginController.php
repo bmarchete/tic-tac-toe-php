@@ -31,7 +31,7 @@ class LoginController
             exit;
         }
 
-        $dados['password'] = crypt($dados['password']);
+        $dados['password'] = crypt($dados['password'], '123456');
         //acessar o bd
         $q = new QueryBuilder();
         //cadastra usuário
@@ -53,7 +53,7 @@ class LoginController
         $dados['email'] = htmlentities($_POST['email'], ENT_QUOTES);
         $dados['password'] = htmlentities($_POST['senha'], ENT_QUOTES);
 
-        //$dados['password'] = crypt($dados['password']);
+        $dados['password'] = crypt($dados['password'], '12345');
         $q = new QueryBuilder();
         $cadastrado = $q->select('users', ['email' => $dados['email'], 'password' => $dados['password']]);
        
@@ -63,6 +63,8 @@ class LoginController
             exit;
         }
 
+        $_SESSION['user'] = $dados['email'];
+        
         header('Location: /start');
     }
 }

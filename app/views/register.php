@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="./public/css/bootstrap.css" rel="stylesheet">
-    <link href="./public/css/login.css" rel="stylesheet">
+    <link href="./public/css/register.css" rel="stylesheet">
 </head>
 
 <body>

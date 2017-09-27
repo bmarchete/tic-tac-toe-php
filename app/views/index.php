@@ -12,14 +12,13 @@
 
 
 	<!-- Fonts -->
-	<link href="./public/css/bootstrap.css" rel="stylesheet">
-
 	<link href="./public/index/fonts/webfont-raleway/webfont-raleway.css" rel="stylesheet" type="text/css">
 	<link href="./public/index/fonts/webfont-font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css">
 
 
 	<!-- Stylesheets -->
 	<link href="./public/index/css/global.css" type="text/css" rel="stylesheet" media="all">
+	<link href="./public/index/css/login.css" type="text/css" rel="stylesheet" media="all">
 
 </head>
 
@@ -37,17 +36,23 @@
 				<div class="header__title-main">Jogo da Velha Online</div>
 				<div class="header__title-sub">By Professor Binho</div>
 			</a>
-			<div class="header__social-icons">
-				<form class="navbar-form " role="search" action="/login" method="post">
+			<div class="login">
+				<form role="search" action="/login" method="post">
+
 					<div class="form-group">
-						<input type="text" class="form-control" name="email" placeholder="Email">
+						<input type="email" class="form-control" name="email" placeholder="Email">
+					</div>
+
+					<div class="form-group">
+						<input type="password" class="form-control" name="senha" placeholder="Senha">
 					</div>
 					<div class="form-group">
-						<input type="text" class="form-control" name="senha" placeholder="Senha">
+						<button type="submit" class="btn btn-primary">Entrar</button>
 					</div>
-					<button type="submit" class="btn btn-default">Entrar</button>
 				</form>
 			</div>
+				
+		
 		</div>
 	</header>
 	<!-- End Header -->
@@ -61,11 +66,13 @@
 			<div class="hero__content-wrapper">
 				<div class="hero__title-wrapper">
 					<div class="hero__title-large">Ola!</div>
-					<div class="hero__title-small">Vamos jogar o Jogo da Velha?.</div>
+					<div class="hero__title-small">Vamos jogar o Jogo da Velha?</div>
 				</div>
-				<?php if($flash) { ?>
-                <div class="alert alert-danger text-center" role="alert"><?= $flash ?></div>
-            <?php } ?>
+				
+				<?php if($this->flash) { ?>
+                <div ><?= $this->flash ?></div>
+				<?php } ?>
+				
 				<div class="hero__description">
 					O jogo da velha, além de divertido, é um excelente exemplo para começar a desenvolver jogos. Esse foi feito para web! Confira
 					fazendo seu cadastro!
