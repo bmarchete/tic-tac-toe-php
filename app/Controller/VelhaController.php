@@ -2,29 +2,15 @@
 namespace Project\Controller;
 
 use Project\Db\QueryBuilder;
+use Project\Util\Flash;
 
 class VelhaController
 {
 
-    public function __construct()
-    {
-        session_start();
-        $this->flash = $this->verificaFlash();
-    }
-
-    private function verificaFlash()
-    {
-        if( array_key_exists('flash', $_SESSION)){
-            $flash = $_SESSION['flash'];
-           unset($_SESSION['flash']);
-           return $flash;
-       }
-
-       return false;
-    }
 
     public function index()
     {
+        $flash = Flash::getFlash();
         require './app/views/index.php';
     }
     
@@ -41,7 +27,7 @@ class VelhaController
 
     public function game()
     {
-     
+        $flash = Flash::getFlash();
      
         // atribui os valores as devidas casas
         for ($i=1; $i <= 9; $i++) { 
@@ -73,7 +59,7 @@ class VelhaController
         
         // verifica se a casa já foi preenchida
         if(array_key_exists('n' . $casa, $_SESSION)){
-            $_SESSION['flash'] = 'Esse campo já foi escolhido';
+            Flash::setFlash('Esse campo já foi escolhido');
             header('Location: /game');
             exit;
         }
@@ -85,7 +71,7 @@ class VelhaController
 
           // verifica se ouve vencedor
         if( $this->hasVencedor() ){
-            $_SESSION['flash'] = 'winner';
+            Flash::setFlash('winner');
            
         }
 

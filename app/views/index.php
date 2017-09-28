@@ -69,8 +69,8 @@
 					<div class="hero__title-small">Vamos jogar o Jogo da Velha?</div>
 				</div>
 				
-				<?php if($this->flash) { ?>
-                <div ><?= $this->flash ?></div>
+				<?php if($flash) { ?>
+                <div ><?= $flash ?></div>
 				<?php } ?>
 				
 				<div class="hero__description">

@@ -1,5 +1,6 @@
 <?php
 //declaração dos namespaces dos controladores e instanciação dos objetos
+session_start();
 
 use Project\Controller\VelhaController;
 $velhaController = new VelhaController();

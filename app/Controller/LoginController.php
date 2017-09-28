@@ -2,22 +2,17 @@
 namespace Project\Controller;
 
 use Project\Db\QueryBuilder;
+use Project\Util\Flash;
 
 class LoginController
 {
 
     public function register()
     {
-
-        $flash = false;
-        // verifica se existe menssagem flash para sere impressa na view
-        if( array_key_exists('flash', $_SESSION)){
-             $flash = $_SESSION['flash'];
-            unset($_SESSION['flash']);
-        }
-
+        $flash = Flash::getFlash();
         require './app/views/register.php';
     }
+
     public function postRegister()
     {
         $dados['email'] = htmlentities($_POST['email'], ENT_QUOTES);
@@ -26,24 +21,25 @@ class LoginController
 
         
         if ($dados['password'] !== $csenha) {
-            $_SESSION['flash'] = 'As senhas não conferem';
+            Flash::setFlash('As senhas não conferem');
             header('Location: /register');
             exit;
         }
 
         $dados['password'] = crypt($dados['password'], '123456');
-        //acessar o bd
+
         $q = new QueryBuilder();
-        //cadastra usuário
         $cadastrado = $q->insert('users', $dados);
         
 
         if (!$cadastrado) {
-            $_SESSION['flash'] = 'Dados inválidos';
+            Flash::setFlash('Dados inválidos');
             header('Location: /register');
             exit;
         }
 
+
+        $_SESSION['user'] = $dados['email'];
         header('Location: /start');
 
     }
@@ -55,10 +51,13 @@ class LoginController
 
         $dados['password'] = crypt($dados['password'], '12345');
         $q = new QueryBuilder();
-        $cadastrado = $q->select('users', ['email' => $dados['email'], 'password' => $dados['password']]);
+        $cadastrou = $q->select('users', [
+            'email' => $dados['email'], 
+            'password' => $dados['password']
+        ]);
        
-        if (!$cadastrado) {
-            $_SESSION['flash'] = 'Dados inválidos';
+        if (!$cadastrou) {
+            Flash::setFlash('Dados inválidos');
             header('Location: /');
             exit;
         }
@@ -67,4 +66,6 @@ class LoginController
         
         header('Location: /start');
     }
+
+    
 }
