@@ -32,6 +32,11 @@ switch ($uri) {
 
         $loginController->login();
         break;
+    
+        case '/logout';
+
+        $loginController->logout();
+        break;
 
     case '/register';
 
